@@ -16,6 +16,8 @@ const stats = {
 }
 
 module.exports = (options) => {
+  console.log("ô¿ô light-mc-crawler has started crawling. If it looks like nothing is happening, wait, it is :)");
+  
   stats.startTime = new Date()
 
   const configPath = path.resolve(options.config)
