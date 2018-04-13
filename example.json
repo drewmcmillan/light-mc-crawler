@@ -1,0 +1,8 @@
+{
+  "maxDepth": 1,
+  "maxChromeInstances": 5,
+  "limit": "/music/",
+  "httpsOnly": true,
+  "showHttpLinksDuring": false,
+  "showHttpLinksAfter": true
+}

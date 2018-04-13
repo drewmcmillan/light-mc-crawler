@@ -1,0 +1,23 @@
+{
+  "name": "light-mc-crawler",
+  "version": "1.2.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "example": "node ./cli.js --url https://www.example.com --config example.json"
+  },
+  "bin": {
+    "light-mc-crawler": "./cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.4.1",
+    "cheerio": "^1.0.0-rc.1",
+    "colors": "^1.1.2",
+    "lighthouse": "^2.9.4",
+    "simplecrawler": "^1.1.3",
+    "yargs": "^8.0.2"
+  }
+}
