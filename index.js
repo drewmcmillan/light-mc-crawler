@@ -5,6 +5,7 @@ const path = require('path')
 const queue = require('async/queue')
 const fs = require('fs')
 const colors = require('colors')
+const util = require('util')
 
 const stats = {
   pageCount: 0,
@@ -100,9 +101,6 @@ function runLighthouse (url, config, callback) {
     url,
     '--output=json',
     '--output-path=stdout',
-    '--disable-device-emulation',
-    '--disable-cpu-throttling',
-    '--disable-network-throttling',
     '--chrome-flags=' + chromeFlags,
     `--config-path=${mixedContent}`
   ]
@@ -177,6 +175,12 @@ function runLighthouse (url, config, callback) {
             } else {
               stats.violationCounts[category.name]++
             }
+          }else if(audit.result.details && audit.result.details.items){
+            audit.result.details.items.forEach((result) => {
+              if (result[0].text) {
+                console.log(`   ${esult[0].text}`)
+              }
+            })
           }
         }
       })
