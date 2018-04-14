@@ -6,13 +6,14 @@ Crawl a website and run it through Google lighthouse, finding mixed content
 ```bash
 npm install -s https://github.com/drewmcmillan/light-mc-crawler
 
-light-mc-crawler --url https://www.example.com --config light-mc-crawler-config.json
+light-mc-crawler --config light-mc-crawler-config.json
 ```
 
 where `light-mc-crawler-config.json` looks something like this:
 ```json
 {
-  "maxDepth": 2, 
+  "url": "https://www.example.com",
+  "maxDepth": 2,
   "maxChromeInstances": 5,
   "limit": "/music/",
   "httpsOnly": true,
@@ -20,6 +21,7 @@ where `light-mc-crawler-config.json` looks something like this:
   "showHttpLinksAfter": true
 }
 ```
+This will crawl `https://www.example.com` and any pages coming off it with `/music/` in the url.
 
 ## Arguments
 
