@@ -17,6 +17,8 @@ const stats = {
 }
 
 module.exports = (options) => {
+  console.log("ô¿ô light-mc-crawler has started crawling. If it looks like nothing is happening, wait, it is :)");
+  
   stats.startTime = new Date()
 
   const configPath = path.resolve(options.config)
@@ -101,6 +103,9 @@ function runLighthouse (url, config, callback) {
     url,
     '--output=json',
     '--output-path=stdout',
+    '--disable-device-emulation', 
+    '--disable-cpu-throttling',  
+    '--disable-network-throttling',
     '--chrome-flags=' + chromeFlags,
     `--config-path=${mixedContent}`
   ]
@@ -130,6 +135,12 @@ function runLighthouse (url, config, callback) {
     report.reportCategories.forEach((category) => {
       let displayedCategory = false
       category.audits.forEach((audit) => {
+        if(audit.id != "is-on-https"){
+          //mixed-content is buggy atm, will work on fixing.
+          //is-on-https seems to surface everything well enough
+          return;
+        }
+
         if (audit.score === 100) {
           stats.passedAuditsCount++
         } else {
@@ -178,7 +189,7 @@ function runLighthouse (url, config, callback) {
           }else if(audit.result.details && audit.result.details.items){
             audit.result.details.items.forEach((result) => {
               if (result[0].text) {
-                console.log(`   ${esult[0].text}`)
+                console.log(`   ${result[0].text}`)
               }
             })
           }
