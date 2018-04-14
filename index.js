@@ -18,7 +18,7 @@ const stats = {
 
 module.exports = (options) => {
   console.log("ô¿ô light-mc-crawler has started crawling. If it looks like nothing is happening, wait, it is :)");
-  
+
   stats.startTime = new Date()
 
   const configPath = path.resolve(options.config)
@@ -127,7 +127,14 @@ function runLighthouse (url, config, callback) {
     try {
       report = JSON.parse(output)
     } catch (parseError) {
-      console.error(`Parsing JSON report output failed: ${output}`)
+      console.log();
+      if(output != ''){
+        console.error(`Parsing JSON report output failed for ${url}: ${output}`);
+        console.log(parseError);
+      } else{
+        console.error(`Lighthouse report returned nothing for ${url}`);
+      }
+
       callback(1)
       return
     }
