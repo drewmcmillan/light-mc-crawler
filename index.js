@@ -104,7 +104,8 @@ function runLighthouse (url, config, callback) {
     '--output=json',
     '--output-path=stdout',
     '--disable-device-emulation', 
-    '--disable-cpu-throttling',  
+    '--disable-cpu-throttling',
+    '--disable-storage-reset', 
     '--disable-network-throttling',
     '--chrome-flags=' + chromeFlags,
     `--config-path=${mixedContent}`
@@ -153,7 +154,7 @@ function runLighthouse (url, config, callback) {
         } else {
           if (!displayedCategory) {
             console.log();
-            console.log(category.name.bold.underline);
+            console.log(category.name.bold.underline + ` current page count: ${stats.pageCount}`);
             displayedCategory = true
           }
           errorCount++
