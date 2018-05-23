@@ -17,7 +17,8 @@ where `light-mc-crawler-config.json` looks something like this:
   "limit": "/music/",
   "httpsOnly": true,
   "showHttpLinksDuring": false,
-  "showHttpLinksAfter": true
+  "showHttpLinksAfter": true,
+  "userAgent": "light-mc-crawler Mixed Content Crawler"
 }
 ```
 

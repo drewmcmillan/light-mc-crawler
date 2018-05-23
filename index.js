@@ -27,6 +27,7 @@ module.exports = (options) => {
   crawler.respectRobotsTxt = false
   crawler.parseHTMLComments = false
   crawler.parseScriptTags = false
+  crawler.userAgent = options.userAgent || "light-mc-crawler Mixed Content Crawler"
   crawler.maxDepth = config.maxDepth || 1
 
 
@@ -98,6 +99,7 @@ function runLighthouse (url, config, callback) {
   stats.pageCount++
   var mixedContent = require.resolve('lighthouse/lighthouse-core/config/mixed-content.js')
   var chromeFlags = config.chromeFlags || '--headless --disable-gpu';
+  var userAgent = options.userAgent || 'light-mc-crawler Mixed Content Crawler'
   const args = [
     url,
     '--output=json',
@@ -105,7 +107,7 @@ function runLighthouse (url, config, callback) {
     '--disable-device-emulation',
     '--disable-cpu-throttling',
     '--disable-network-throttling',
-    '--chrome-flags=' + chromeFlags,
+    '--chrome-flags=' + chromeFlags + '--user-agent=' + userAgent,
     `--config-path=${mixedContent}`
   ]
 

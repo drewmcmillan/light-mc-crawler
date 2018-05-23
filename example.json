@@ -4,5 +4,6 @@
   "limit": "/music/",
   "httpsOnly": true,
   "showHttpLinksDuring": false,
-  "showHttpLinksAfter": true
+  "showHttpLinksAfter": true,
+  "userAgent": "light-mc-crawler Mixed Content Crawler"
 }
