@@ -99,7 +99,7 @@ function runLighthouse (url, config, callback) {
   stats.pageCount++
   var mixedContent = require.resolve('lighthouse/lighthouse-core/config/mixed-content.js')
   var chromeFlags = config.chromeFlags || '--headless --disable-gpu';
-  var userAgent = options.userAgent || 'light-mc-crawler Mixed Content Crawler'
+  var userAgent = config.userAgent || 'light-mc-crawler Mixed Content Crawler'
   const args = [
     url,
     '--output=json',
