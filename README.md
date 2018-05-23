@@ -18,7 +18,8 @@ where `light-mc-crawler-config.json` looks something like this:
   "limit": "/music/",
   "httpsOnly": true,
   "showHttpLinksDuring": false,
-  "showHttpLinksAfter": true
+  "showHttpLinksAfter": true,
+  "userAgent": "light-mc-crawler Mixed Content Crawler"
 }
 ```
 This will crawl `https://www.example.com` and any pages coming off it with `/music/` in the url.
