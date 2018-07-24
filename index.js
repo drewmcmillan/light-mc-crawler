@@ -93,6 +93,7 @@ module.exports = (options) => {
 }
 
 function runLighthouse (url, config, callback) {
+  console.log('RUN LIGHTHOUSE');
   if(config.httpsOnly){
     url = url.replace("http://", "https://");
   }
@@ -123,6 +124,7 @@ function runLighthouse (url, config, callback) {
 
   stats.auditTimesByPageUrl[url] = {startTime: new Date()}
   lighthouse.once('close', () => {
+    console.log('CLOSE LIGHTHOUSE');
     stats.auditTimesByPageUrl[url].endTime = new Date()
     let errorCount = 0
 
