@@ -108,6 +108,7 @@ function runLighthouse (url, config, callback) {
     '--output-path=stdout',
     '--disable-device-emulation', 
     '--disable-cpu-throttling',
+    '--enable-error-reporting',
     '--disable-storage-reset', 
     '--disable-network-throttling',
     '--chrome-flags=' + chromeFlags + '--user-agent=' + userAgent,
@@ -137,7 +138,14 @@ function runLighthouse (url, config, callback) {
       if(output != ''){
         console.error(`Parsing JSON report output failed for ${url}: ${output}`);
         console.log(parseError);
-      } else{
+      } else if (output.includes('Something went wrong')) {
+
+        console.log('SOMETHING WENT WRONG');
+        console.log(output);
+    
+
+
+      }else{
         console.error(`Lighthouse report returned nothing for ${url}`);
       }
 
