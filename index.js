@@ -119,6 +119,7 @@ function runLighthouse (url, config, callback) {
 
   let output = ''
   lighthouse.stdout.on('data', (data) => {
+    console.log('DATATAT');
     output += data
   })
 
