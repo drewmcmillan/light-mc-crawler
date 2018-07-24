@@ -4,8 +4,8 @@
   "maxChromeInstances": 10,
   "limit": "/news/",
   "httpsOnly": true,
-  "showHttpLinksDuring": true,
+  "showHttpLinksDuring": false,
   "showHttpLinksAfter": true,
-  "chromeFlags": "--no-sandbox --user-data-dir --headless --disable-setuid-sandbox --disable-gpu",
+  "chromeFlags": ["--show-paint-rects", "--no-sandbox", "--user-data-dir", "--headless", "--disable-setuid-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
   "userAgent": "light-mc-crawler - News Discovery - Mixed Content Crawler"
 }
