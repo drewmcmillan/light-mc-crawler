@@ -5,35 +5,36 @@
  */
 'use strict';
 
-module.exports = {
+/** @type {LH.Config.Json} */
+const mixedContentConfig = {
   // This performs two passes:
   // (1) Gather the default resources requested by the page, and
   // (2) Re-load page but attempt to upgrade each request to HTTPS.
   passes: [{
     passName: 'defaultPass',
-    recordTrace: false,
-    useThrottling: false,
-    gatherers: ['url'],
+    gatherers: [],
   }, {
     passName: 'mixedContentPass',
-    recordTrace: false,
-    useThrottling: false,
     gatherers: ['mixed-content'],
   }],
 
   audits: [
+    'mixed-content',
     'is-on-https',
   ],
 
   categories: {
     mixedContent: {
-      name: 'Mixed Content',
+      title: 'Mixed Content',
       description: 'These audits check which resources support HTTPS and ' +
         'which are potentially blocking the page from switching to HTTPS due ' +
         'to mixed-content warnings.',
-      audits: [
+      auditRefs: [
         {id: 'is-on-https', weight: 1},
+        {id: 'mixed-content', weight: 1},
       ],
     },
   },
 };
+
+module.exports = mixedContentConfig;

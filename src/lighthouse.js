@@ -3,14 +3,12 @@ const chromeLauncher = require('chrome-launcher');
 const mixedContentConfig = require('./mixed-content-config');
 
 module.exports = function (url, config) {
-  console.log('lighthouse - ' + url);
-
   const opts = {
     disableDeviceEmulation: true,
     disableCpuThrottling: true,
     disableStorageReset: true,
     disableNetworkThrottling: true,
-    chromeFlags: config.chromeFlags || ['--show-paint-rects', '--no-sandbox', '--user-data-dir', '--headless', '--disable-setuid-sandbox', '--disable-gpu'],
+    chromeFlags: config.chromeFlags || ["--show-paint-rects", "--no-sandbox", "--user-data-dir", "--headless", "--disable-setuid-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
     userAgent: config.userAgent || 'light-mc-crawler Mixed Content Crawler'
   };
 
@@ -18,34 +16,28 @@ module.exports = function (url, config) {
     opts.port = chrome.port;
     return lighthouse(url, opts, mixedContentConfig).then(results => {
       return chrome.kill()
-              .then(() => results)
-              .then(results => {
-                let result = {
-                  url: url,
-                  value: results['audits']['is-on-https']['score'],
-                  causes: []
-                }
+        .then(() => results)
+        .then(results => {
+          let result = {
+            url: url,
+            value: results['lhr']['audits']['is-on-https']['score'],
+            causes: []
+          }
 
-                if(result.value != true){
-                  results['audits']['is-on-https']['details']['items'].forEach(function(el) {
-                    result.causes.push(el.text);
-                  });
-                }
+          if(result.value != true){
+            results['lhr']['audits']['is-on-https']['details']['items'].forEach(function(el) {
+              result.causes.push(el.text);
+            });
+          }
 
-                return result
-              }).catch(function(reason) {
-        console.log('EERRRR 2');
-        console.log(reason);
-        console.log('EERRRR 2-');
+          return result
+        }).catch(function(err) {
+            console.log(err);
+        });
+    }).catch(function(err) {
+        console.log(err);
     });
-    }).catch(function(reason) {
-        console.log('EERRRR 1');
-        console.log(reason);
-        console.log('EERRRR 1-');
-    });
-  }).catch(function(reason) {
-        console.log('EERRRR 3');
-        console.log(reason);
-        console.log('EERRRR 3-');
-    });
+  }).catch(function(err) {
+      console.log(err);
+  });
 }
